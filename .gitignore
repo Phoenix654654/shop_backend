@@ -1,0 +1,22 @@
+# Translations
+*.mo
+*.pot
+
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+venv
+db.sqlite3
+.idea
+SERVER.md
+.venv
+env
+media
+env.dev
+.env.dev
+env
+.env
