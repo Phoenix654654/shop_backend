@@ -42,7 +42,7 @@ class UserViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        return Response(UserListSerializer(user), status=HTTP_201_CREATED)
+        return Response(UserListSerializer(user).data, status=HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop("partial", False)
@@ -50,7 +50,7 @@ class UserViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(UserListSerializer(instance), status=HTTP_200_OK)
+        return Response(UserListSerializer(instance).data, status=HTTP_200_OK)
 
 
 class UserActionViewSet(ViewSet):
