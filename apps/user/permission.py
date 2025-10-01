@@ -3,6 +3,8 @@ from rest_framework.permissions import BasePermission
 
 class CustomPermission(BasePermission):
     def has_permission(self, request, view):
+        if view.action == "create" and view.__class__.__name__ == "UserViewSet":
+            return True
         if not request.user or not request.user.is_authenticated:
             return False
         perms_map = getattr(view, 'perms_map', {})

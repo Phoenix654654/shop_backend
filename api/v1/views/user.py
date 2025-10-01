@@ -58,10 +58,6 @@ class UserActionViewSet(ViewSet):
     serializer_class = None
     queryset = User.objects.all()
 
-    perms_map = {
-        'POST': ['account_management_create'],
-    }
-
     def block(self, request, *args, **kwargs):
         user = get_object_or_404(User, pk=kwargs['pk'])
         user.is_active = False
