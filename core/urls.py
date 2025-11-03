@@ -32,6 +32,7 @@ def logout_view(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.v1.urls.user')),
+    path('api/', include('api.v1.urls.product')),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='admin/login.html'), name='login'),
     path('accounts/logout/', logout_view, name='logout'),
 
