@@ -8,8 +8,6 @@ class Category(models.Model):
     name_ru = models.CharField(max_length=128)
     name_kg = models.CharField(max_length=128, null=True)
     name_en = models.CharField(max_length=128, null=True)
-    left_ordering = models.PositiveSmallIntegerField(null=True, blank=True)
-    right_ordering = models.PositiveSmallIntegerField(null=True, blank=True)
     image = models.ImageField(upload_to='category/original_images/', blank=True, null=True)
     resized_image = models.ImageField(upload_to='category/resized_images/', blank=True, null=True)
 

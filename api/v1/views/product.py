@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 
-from api.v1.filters.product import CategoryFilter, ProductFilter
+from api.v1.filters.product import ProductFilter
 from api.v1.serializers.product import CategoryCreateSerializer, CategoryListSerializer, CategoryRetrieveSerializer, \
     ProductCreateSerializer, ProductListSerializer, ProductUpdateSerializer, ProductRetrieveSerializer, \
     CategoryUploadImageSerializer, ProductImagesCreateSerializer
@@ -20,12 +20,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategoryCreateSerializer
     permission_classes = (AllowAny,)
     pagination_class = CustomPagination
-    filterset_class = CategoryFilter
-
-    def get_permissions(self):
-        if self.action in ("create", "update", "partial_update", "destroy"):
-            return (IsAdminUser(),)
-        return super().get_permissions()
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -44,11 +38,6 @@ class ProductViewSet(mixins.RetrieveModelMixin,
     permission_classes = (AllowAny,)
     pagination_class = CustomPagination
     filterset_class = ProductFilter
-
-    def get_permissions(self):
-        if self.action in ("create", "update", "partial_update", "destroy"):
-            return (IsAdminUser(),)
-        return super().get_permissions()
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -122,7 +111,6 @@ class CategoryUploadImageViewSet(APIView):
 
 class ProductUploadImagesViewSet(APIView):
     serializer_class = ProductImagesCreateSerializer
-    permission_classes = (IsAdminUser,)
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
@@ -142,7 +130,6 @@ class ProductUploadImagesViewSet(APIView):
 
 
 class ProductDeleteImagesViewSet(viewsets.ViewSet):
-    permission_classes = (IsAdminUser,)
 
     def destroy(self, request, pk):
         images = ProductImage.objects.filter(product_id=pk)
@@ -153,7 +140,6 @@ class ProductDeleteImagesViewSet(viewsets.ViewSet):
 
 
 class ProductDeleteImageViewSet(viewsets.ViewSet):
-    permission_classes = (IsAdminUser,)
 
     def destroy(self, request, image_id):
         image = get_object_or_404(ProductImage, id=image_id)

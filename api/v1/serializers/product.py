@@ -7,7 +7,7 @@ class CategoryCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = (
-            "id", "name_ru", "name_kg", "name_en", "left_ordering", "right_ordering"
+            "id", "name_ru", "name_kg", "name_en"
         )
 
 
@@ -22,7 +22,7 @@ class CategoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = (
-            "id", "name_ru", "name_kg", "name_en", "left_ordering", "right_ordering", "image", "resized_image",
+            "id", "name_ru", "name_kg", "name_en", "image", "resized_image",
             "price_from"
         )
 
@@ -61,7 +61,7 @@ class CategoryRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = (
-            "id", "name_ru", "name_kg", "name_en", "left_ordering", "right_ordering", "image", "resized_image",
+            "id", "name_ru", "name_kg", "name_en", "image", "resized_image",
             "products"
         )
 
